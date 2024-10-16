@@ -9,6 +9,8 @@
 .history
 .svn/
 migrate_working_dir/
+/config/
+api-cred.properties
 
 # IntelliJ related
 *.iml

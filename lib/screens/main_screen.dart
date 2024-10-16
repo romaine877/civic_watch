@@ -1,6 +1,7 @@
 import 'package:civic_watch/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../cubits/auth/auth_cubit.dart';
@@ -15,17 +16,18 @@ class MainScreen extends StatelessWidget {
         return state.maybeWhen(
           authenticated: (userModel) {
             return  Scaffold(
-                body: SafeArea(
-                  child: Column(
-                    children: [
-                      const Expanded(child: Center(child: Text('Main Screen'))),
-                      ShadButton(
+              floatingActionButton:  ShadButton(
                         onPressed: () {
                           context.read<AuthCubit>().signOut();
                         },
                         child: const Text('Sign Out'),
                       ),
-                    ],
+                body: SafeArea(
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: const LatLng(37.7749, -122.4194),
+                      zoom: 12,
+                    ),
                   ),
                 ),
               );

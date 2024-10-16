@@ -1,0 +1,30 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "civic-watch-dev",
+                    "appId": "1:115536547993:android:ad6e55ab720b109c1a2808",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "civic-watch-dev",
+                    "appId": "1:115536547993:ios:b9da558e447bcc3d1a2808",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "civic-watch-dev",
+                    "configurations": {
+                        "android": "1:115536547993:android:ad6e55ab720b109c1a2808",
+                        "ios": "1:115536547993:ios:b9da558e447bcc3d1a2808"
+                    }
+                }
+            }
+        }
+    }
+}

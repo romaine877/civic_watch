@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "102040114040",
+    "project_id": "civic-watch-prod",
+    "storage_bucket": "civic-watch-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102040114040:android:493d7522a0d719b5b62e8d",
+        "android_client_info": {
+          "package_name": "dev.romaine.civicwatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADSZxbO0ByEdQx_ds5ZcQQrHF_R8_TiuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:civic_watch/cubits/auth/auth_cubit.dart';
 import 'package:civic_watch/helpers/env_helper.dart';
 import 'package:civic_watch/screens/main_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GoogleFonts.pendingFonts();
+  await Firebase.initializeApp();
 
   await Supabase.initialize(
     url: Env.supabaseUrl,

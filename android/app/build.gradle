@@ -1,5 +1,8 @@
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
@@ -12,6 +15,12 @@ if (localPropertiesFile.exists()) {
         localProperties.load(reader)
     }
 }
+
+def apiCredProperties = new Properties()
+   def apiCredPropertiesFile = rootProject.file('api-cred.properties')
+   if (apiCredPropertiesFile.exists()) {
+       apiCredProperties.load(new FileInputStream(apiCredPropertiesFile))
+   }
 
 def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
 if (flutterVersionCode == null) {
@@ -60,6 +69,9 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
+        manifestPlaceholders = [
+            googleMapsApiKey: apiCredProperties['google_maps_api_key']
+        ]
     }
 
     buildTypes {
