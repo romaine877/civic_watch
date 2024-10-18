@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../models/user_model.dart';
 
@@ -27,4 +26,6 @@ class AuthCubit extends Cubit<AuthState> {
       emit(const AuthState.unauthenticated());
     });
   }
+
+
 }

@@ -65,7 +65,7 @@ class App extends StatelessWidget {
             brightness: Brightness.light,
             colorScheme: const ShadSlateColorScheme.light()),
         home: _flavorBanner(
-          child: const MainScreen(),
+          child: const LandingScreen(),
           show: kDebugMode && Env.type == 'dev',
         ),
       ),
