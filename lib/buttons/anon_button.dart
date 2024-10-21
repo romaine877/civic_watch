@@ -2,6 +2,7 @@ import 'package:civic_watch/wrappers/animated_tap.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../constants/images.dart';
 import '../cubits/auth/auth_cubit.dart';
@@ -16,6 +17,7 @@ class AnonSignInButton extends StatelessWidget {
       child: AnimatedTap(
         onTap: () {
           context.read<AuthCubit>().signIn();
+          context.go('/');
         },
         child: SvgPicture.asset(
           Images.anonSignIn,

@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:civic_watch/services/service_locator.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../models/user_model.dart';
 
@@ -16,16 +18,12 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthState.authenticated(
         UserModel.testUser(),
       ));
+      getIt<GoRouter>().go('/');
     });
   }
 
   void signOut() {
-    emit(const AuthState.loading());
-    // Simulate a network request
-    Future.delayed(const Duration(seconds: 2), () {
-      emit(const AuthState.unauthenticated());
-    });
+    emit(const AuthState.unauthenticated());
+    getIt<GoRouter>().go('/');
   }
-
-
 }

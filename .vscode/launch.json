@@ -21,6 +21,8 @@
                 "dev",
                 "--dart-define=SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkbnN1a3JhanZibnZnemlocmR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg5NDkyNzEsImV4cCI6MjA0NDUyNTI3MX0.a33osR-m4_p_2AFcssMXk6Bp3RLNnTgtY7fGYuN_vUM",
                 "--dart-define=SUPABASE_URL=https://hdnsukrajvbnvgzihrdw.supabase.co",
+                "--dart-define=SENTRY_DSN=https://civicwatch.sentry.io/123456",
+                "--dart-define=ENV=dev"
             ],
             "program": "lib/main.dart"
         },

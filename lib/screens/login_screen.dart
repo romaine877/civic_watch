@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:civic_watch/cubits/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../buttons/anon_button.dart';
 import '../buttons/apple_button.dart';
@@ -10,6 +12,30 @@ import '../constants/images.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          loading: () {
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
+          orElse: () {
+            return const LoginView();
+          },
+        );
+      },
+    );
+  }
+}
+
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +94,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const AnonSignInButton(
-                
-              ),
+              const AnonSignInButton(),
               if (Platform.isIOS) const AppleSignInButton(),
               const GoogleSignInButton(),
               const SizedBox(height: 16),

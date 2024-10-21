@@ -11,6 +11,7 @@
 migrate_working_dir/
 /config/
 api-cred.properties
+devtools_options.yaml
 
 # IntelliJ related
 *.iml
