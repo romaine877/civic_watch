@@ -11,11 +11,14 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'constants/images.dart';
+
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GoogleFonts.pendingFonts(
-    [GoogleFonts.afacad(),]
-  );
+
+  await GoogleFonts.pendingFonts([
+    GoogleFonts.afacad(),
+  ]);
   await Firebase.initializeApp();
 
   await Supabase.initialize(
@@ -30,9 +33,9 @@ FutureOr<void> main() async {
 class App extends StatelessWidget {
   const App({super.key});
 
-
   @override
   Widget build(BuildContext context) {
+    precacheImage(const AssetImage(Images.loginCover), context);
     return MultiBlocProvider(
       providers: [
         BlocProvider(

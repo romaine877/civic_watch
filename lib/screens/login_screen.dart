@@ -8,7 +8,7 @@ import '../buttons/anon_button.dart';
 import '../buttons/apple_button.dart';
 import '../buttons/google_button.dart';
 import '../constants/images.dart';
-//import 'package:flutter_animate/flutter_animate.dart';
+import '../widgets/loading_indicator.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
           loading: () {
             return const Scaffold(
               body: Center(
-                child: CircularProgressIndicator(),
+                child: LoadingIndicator(),
               ),
             );
           },

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../helpers/extensions.dart';
+import '../widgets/loading_indicator.dart';
 
 class ReportsScreen extends StatelessWidget {
   const ReportsScreen({super.key});
@@ -25,18 +26,18 @@ class ReportsScreen extends StatelessWidget {
                 date: DateTime(2024, 10, 10),
                 //onTap: () {},
               ),
-               ReportItemWidget(
+              ReportItemWidget(
                 imageUrl: 'https://placecats.com/300/200.png',
                 title: 'Light post down',
                 likes: '4.92',
                 date: DateTime(2024, 10, 10),
                 //onTap: () {},
               ),
-               ReportItemWidget(
-                imageUrl: 'https://placecats.com/300/200.png',
+              ReportItemWidget(
+                imageUrl: 'https://placecats.com/bella/300/200',
                 title: 'Pothole',
                 likes: '4.92',
-                date: DateTime(2024, 10, 10),
+                date: DateTime(2024, 10, 8),
                 //onTap: () {},
               ),
               SizedBox(
@@ -49,8 +50,6 @@ class ReportsScreen extends StatelessWidget {
     );
   }
 }
-
-
 
 class ReportItemWidget extends StatelessWidget {
   const ReportItemWidget({
@@ -70,27 +69,17 @@ class ReportItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final borderColor = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white // Color for dark mode
-        : Colors.black; // Color for light mode
-    BorderSide side =  BorderSide( color: borderColor, width: 3);
-
     return GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 24),
-        child: Column(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  topRight: Radius.circular(12),
-                ),
-              ),
-              child: CachedNetworkImage(
-                imageUrl: imageUrl!,
-                imageBuilder: (context, imageProvider) => Stack(
+        child: ShadCard(
+          padding: const EdgeInsets.all(0),
+          child: CachedNetworkImage(
+            imageUrl: imageUrl!,
+            imageBuilder: (context, imageProvider) => Stack(
+              children: [
+                Column(
                   children: [
                     Container(
                       decoration: BoxDecoration(
@@ -98,98 +87,84 @@ class ReportItemWidget extends StatelessWidget {
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        border: Border(
-                          top: side,
-                          left: side,
-                          right: side,
-                        ),
                         borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8),
+                          topLeft: Radius.circular(6),
+                          topRight: Radius.circular(6),
                         ),
                       ),
                       height: 198,
                     ),
-                    Positioned(
-                        top: 18,
-                        right: 18,
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            LucideIcons.heart,
-                            color: Colors.white,
-                            size: 30,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title!,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
                           ),
-                        )),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              date != null
+                                  ? Text(
+                                      date!.toFormattedDayCountdownShort(),
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
+                                    )
+                                  : Text(
+                                      '2 days ago',
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
+                                    ),
+                              const Spacer(),
+                              Text(
+                                "Freetown",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge
+                                    ?.copyWith(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-                placeholder: (context, url) => const CircularProgressIndicator(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-              ),
-            ),
-            Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(8),
-                    bottomRight: Radius.circular(8),
-                  ),
-                  border: Border(
-                    bottom: side,
-                    left: side,
-                    right: side,
+                Positioned(
+                  top: 18,
+                  right: 18,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      LucideIcons.heart,
+                      color: Colors.white,
+                      size: 30,
+                    ),
                   ),
                 ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title!,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
-                      ),
-                   
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                  date != null?  Text(
-                                date!.toFormattedDayCountdownShort(),
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ):
-                              Text(
-                                '2 days ago',
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                           
-                            const Spacer(),
-                     
-                             
-                                Text(
-                                  "Freetown",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.copyWith(
-                                     
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                ),
-                              
-                            
-                          ]),
-                    ],
-                  ),
-                )),
-          ],
+              ],
+            ),
+            placeholder: (context, url) => const LoadingIndicator(),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          ),
         ),
       ),
     );
   }
 }
+
+
 
 class CustomChip extends StatelessWidget {
   const CustomChip({

@@ -1,17 +1,21 @@
+import 'dart:io';
+
 import 'package:civic_watch/cubits/auth/auth_cubit.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'screens/account_screen.dart';
+import 'screens/image_preview_page.dart';
 import 'screens/login_screen.dart';
 import 'screens/main_screen.dart';
 import 'screens/map_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/reports_screen.dart';
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _sectionNavigatorKey = GlobalKey<NavigatorState>();
+final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final _sectionNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'section');
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
@@ -37,6 +41,18 @@ final GoRouter router = GoRouter(
           GoRoute(
             path: '/',
             builder: (context, state) => const MapScreen(),
+            routes: [
+              GoRoute(
+                path: '/image-preview',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) {
+                   final extra = state.extra as Map<String, dynamic>;
+        final List<XFile> pictures = extra['pictures'];
+        final File mapSnap = extra['mapSnap'];
+                  return ImagePreviewPage(images: pictures, mapSnap: mapSnap);
+                },
+              ),
+            ],
           ),
         ]),
         StatefulShellBranch(routes: [
